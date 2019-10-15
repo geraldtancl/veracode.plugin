@@ -1,4 +1,4 @@
-package com.veracode.cliang.sastPlugin.runConfigImpl;
+package com.veracode.cliang.sastPlugin.runConfig.runImpl;
 
 public class RunConfigException extends Exception {
     private String stepName;

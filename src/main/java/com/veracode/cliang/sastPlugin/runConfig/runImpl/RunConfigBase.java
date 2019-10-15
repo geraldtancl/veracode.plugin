@@ -1,4 +1,4 @@
-package com.veracode.cliang.sastPlugin.runConfigImpl;
+package com.veracode.cliang.sastPlugin.runConfig.runImpl;
 
 import com.veracode.cliang.sastPlugin.objects.config.ScanConfiguration;
 import com.veracode.cliang.sastPlugin.objects.config.StaticAnalysisConfig;

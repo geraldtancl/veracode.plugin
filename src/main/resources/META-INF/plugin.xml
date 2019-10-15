@@ -34,8 +34,13 @@
         <!-- Add your actions here -->
         <group id="com.veracode.cliang.sast.menu.veracode" text="Veracode" popup="true">
             <add-to-group group-id="MainMenu" anchor="after" relative-to-action="HelpMenu" />
-            <action id="DownloadResultAction"
-                    class="com.veracode.cliang.sastPlugin.view.actions.DownloadResultAction" text="Download Static Analysis Result"
+            <action id="RunAutoScanAction" class="com.veracode.cliang.sastPlugin.view.actions.RunAutoScanAction"
+                    text="Scan Application" description="Run a static analysis depends on veracode.config file"/>
+            <action id="RunAutoDownloadAction" class="com.veracode.cliang.sastPlugin.view.actions.RunAutoDownloadAction"
+                    text="Download Result" description="Download latest result depends on veracode.config" />
+            <separator/>
+            <action id="DownloadResultManualAction"
+                    class="com.veracode.cliang.sastPlugin.view.actions.DownloadResultAction" text="Download Result (Manual)"
                     description="Download static analysis result from the platform" />
             <separator />
             <action class="com.veracode.cliang.sastPlugin.view.actions.UpdateCredentialAction" id="UpdateCredentialAction" text="Update Credential"

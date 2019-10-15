@@ -2,14 +2,12 @@ package com.veracode.cliang.sastPlugin.view.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.ServiceManager;
 import com.veracode.cliang.sastPlugin.objects.config.ScanConfiguration;
-import com.veracode.cliang.sastPlugin.runConfigImpl.RunConfigBase;
-import com.veracode.cliang.sastPlugin.runConfigImpl.RunDownloadConfig;
-import com.veracode.cliang.sastPlugin.runConfigImpl.RunScanConfig;
+import com.veracode.cliang.sastPlugin.runConfig.runImpl.RunConfigBase;
+import com.veracode.cliang.sastPlugin.runConfig.runImpl.RunDownloadConfig;
+import com.veracode.cliang.sastPlugin.runConfig.runImpl.RunScanConfig;
 import com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService;
 import com.veracode.cliang.sastPlugin.services.RunConfigToolWindowHolderService;
 import com.veracode.cliang.sastPlugin.services.ScanConfigurationHolderService;

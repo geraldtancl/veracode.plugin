@@ -1,4 +1,4 @@
-package com.veracode.cliang.sastPlugin.runConfigImpl;
+package com.veracode.cliang.sastPlugin.runConfig.runImpl;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
@@ -10,7 +10,6 @@ import com.veracode.cliang.sastPlugin.apiWrapper.SandboxOperationWrapper;
 import com.veracode.cliang.sastPlugin.objects.config.ScanConfiguration;
 import com.veracode.cliang.sastPlugin.objects.raw.appList.AppType;
 import com.veracode.cliang.sastPlugin.objects.raw.appList.Applist;
-import com.veracode.cliang.sastPlugin.objects.raw.buildInfo.Buildinfo;
 import com.veracode.cliang.sastPlugin.objects.raw.buildList.BuildType;
 import com.veracode.cliang.sastPlugin.objects.raw.buildList.Buildlist;
 import com.veracode.cliang.sastPlugin.objects.raw.detailedReport.Detailedreport;
@@ -22,7 +21,6 @@ import com.veracode.cliang.sastPlugin.view.toolWindows.result.ResultToolWindowFa
 import com.veracode.cliang.sastPlugin.view.toolWindows.runConfig.RunConfigToolWindow;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 public class RunDownloadConfig extends RunConfigBase {
