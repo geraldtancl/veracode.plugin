@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>com.veracode.cliang.intellij.plugin</id>
+    <name>Veracode Static Analysis (Unofficial)</name>
+    <vendor email="cliang@veracode.com" url="https://www.veracode.com">Veracode (Unofficial)</vendor>
+
+    <idea-version since-build="182.*" until-build="193.*" />
+
+    <description><![CDATA[
+    Enter short description for plugin here.<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <!--<toolWindow id="Veracode SAST" anchor="bottom" secondary="false" factoryClass="ResultToolWindowFactory"  ></toolWindow> -->
+
+        <applicationService serviceImplementation="com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService" />
+
+        <projectService serviceImplementation="com.veracode.cliang.sastPlugin.services.UserRightsHolderService" />
+        <projectService serviceImplementation="com.veracode.cliang.sastPlugin.services.ReportHolderService"/>
+        <projectService serviceImplementation="com.veracode.cliang.sastPlugin.services.ResultToolWindowHolderService"/>
+        <projectService serviceImplementation="com.veracode.cliang.sastPlugin.services.ScanConfigurationHolderService" />
+        <projectService serviceImplementation="com.veracode.cliang.sastPlugin.services.RunConfigToolWindowHolderService" />
+
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="com.veracode.cliang.sast.menu.veracode" text="Veracode" popup="true">
+            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="HelpMenu" />
+            <action id="DownloadResultAction"
+                    class="com.veracode.cliang.sastPlugin.view.actions.DownloadResultAction" text="Download Static Analysis Result"
+                    description="Download static analysis result from the platform" />
+            <separator />
+            <action class="com.veracode.cliang.sastPlugin.view.actions.UpdateCredentialAction" id="UpdateCredentialAction" text="Update Credential"
+                    description="Update API credential" />
+            <separator />
+            <group id="com.veracode.cliang.sast.menu.veracode.runConfig" class="com.veracode.cliang.sastPlugin.view.actions.RunConfigActionGroup" text="Run Config" popup="true" />
+        </group>
+    </actions>
+
+
+
+</idea-plugin>
