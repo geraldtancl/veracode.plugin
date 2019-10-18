@@ -147,7 +147,7 @@ public class ResultToolWindow implements TreeSelectionListener {
         panelBorder = BorderFactory.createRaisedBevelBorder();
         titledBorder = BorderFactory.createTitledBorder(panelBorder, "Findings", TitledBorder.LEFT, TitledBorder.ABOVE_TOP);
         findingListingPanel.setBorder(titledBorder);
-        findingListingPanel.setBackground(Color.WHITE);
+        //findingListingPanel.setBackground(Color.WHITE);
 
         findingListingPanel.setMinimumSize(new Dimension(400, 0));
         findingListingPanel.setPreferredSize(new Dimension(400, 0));
@@ -223,7 +223,7 @@ public class ResultToolWindow implements TreeSelectionListener {
         panelBorder = BorderFactory.createLoweredBevelBorder();
         titledBorder = BorderFactory.createTitledBorder(panelBorder, "Descriptions", TitledBorder.LEFT, TitledBorder.ABOVE_TOP);
         findingInfoPanel.setBorder(titledBorder);
-        findingInfoPanel.setBackground(Color.WHITE);
+        //findingInfoPanel.setBackground(Color.WHITE);
 //        findingInfoPanel.setMinimumSize(new Dimension(1000, 0));
 //        findingInfoPanel.setPreferredSize(new Dimension(1000, 0));
 //        findingInfoPanel.setMaximumSize(new Dimension(1000, Short.MAX_VALUE));
@@ -250,7 +250,7 @@ public class ResultToolWindow implements TreeSelectionListener {
 
         parentPanel = new JPanel();
         parentPanel.setLayout(new BoxLayout(parentPanel, BoxLayout.LINE_AXIS));
-        parentPanel.setBackground(Color.WHITE);
+//        parentPanel.setBackground(Color.WHITE);
         parentPanel.setAlignmentX(0.0f);
 
         parentPanel.add(Box.createRigidArea(new Dimension(5, 0)));
@@ -307,7 +307,7 @@ public class ResultToolWindow implements TreeSelectionListener {
         List<JScrollPane> paneList = new ArrayList<JScrollPane>();
 
         for (JPanel jPanel: jPanelList) {
-            jPanel.setBackground(Color.WHITE);
+//            jPanel.setBackground(Color.WHITE);
             jPanel.add(new JLabel("0 finding."));
 
             JScrollPane scrollPane = new JBScrollPane(jPanel);

@@ -27,7 +27,6 @@ public class FindingInformationSubview extends JBTabbedPane {
         super();
         this.setTabPlacement(JTabbedPane.BOTTOM);
         this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-        //this.setBackground(Color.WHITE);
 
         this.selectedFlaw = selectedFlaw;
         this.scanReport = scanReport;
@@ -75,7 +74,6 @@ public class FindingInformationSubview extends JBTabbedPane {
         // Setting up tab content for description
         if (selectedFlaw == null) {
 //            JPanel parent = new JPanel();
-//            parent.setBackground(Color.WHITE);
 //            return new JLabel("Choose a flaw first");
             return;
             //return this;
@@ -116,7 +114,7 @@ public class FindingInformationSubview extends JBTabbedPane {
 
 
         JTextPane infoPane = new JTextPane();
-        infoPane.setBackground(Color.WHITE);
+//        infoPane.setBackground(Color.WHITE);
         infoPane.setContentType("text/html");
         infoPane.setText(findingInfoContent);
 

@@ -271,18 +271,27 @@ public class ResultSelectorDialog extends DialogWrapper {
 
         List<BuildType> scanList = buildListingParentObj.getBuild();
 
-        scanList.sort(new Comparator<BuildType>() {
-            @Override
-            public int compare(BuildType o1, BuildType o2) {
-                if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
-                    return 9999;
-                } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
-                    return -9999;
-                } else {
-                    return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+        if (scanType == POLICY_SCAN_TYPE) {
+            scanList.sort(new Comparator<BuildType>() {
+                @Override
+                public int compare(BuildType o1, BuildType o2) {
+                    if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
+                        return 9999;
+                    } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+                        return -9999;
+                    } else {
+                        return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            scanList.sort(new Comparator<BuildType>() {
+                @Override
+                public int compare(BuildType o1, BuildType o2) {
+                    return o1.getBuildId() < o2.getBuildId()? 1 : -1;
+                }
+            });
+        }
 
         scansMap = new HashMap<>();
 

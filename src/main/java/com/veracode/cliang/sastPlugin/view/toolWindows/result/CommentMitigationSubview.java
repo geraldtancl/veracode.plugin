@@ -56,7 +56,7 @@ public class CommentMitigationSubview extends JPanel {
          */
         this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
-        this.setBackground(Color.WHITE);
+//        this.setBackground(Color.WHITE);
 
         this.selectedFlaw = selectedFlaw;
         this.detailedreport = detailedreport;
@@ -143,7 +143,7 @@ public class CommentMitigationSubview extends JPanel {
         parent.setLayout(new BoxLayout(parent, BoxLayout.PAGE_AXIS));
         //parent.setAlignmentX(0.5f);
         //parent.setAlignmentY(0.0f);
-        parent.setBackground(Color.WHITE);
+//        parent.setBackground(Color.WHITE);
 
 
         for (MergedCommentMitigationObject obj: commentMitigationList) {
@@ -162,7 +162,7 @@ public class CommentMitigationSubview extends JPanel {
             auditTrailText.append(":");
 
             JTextArea auditTrail = new JBTextArea(auditTrailText.toString());
-            auditTrail.setBackground(Color.WHITE);
+//            auditTrail.setBackground(Color.WHITE);
             auditTrail.setLineWrap(true);
             auditTrail.setWrapStyleWord(true);
             auditTrail.setEditable(false);
@@ -181,7 +181,7 @@ public class CommentMitigationSubview extends JPanel {
 //                    auditTrail.getBorder()));
 
             JTextArea comment = new JBTextArea("\"" + obj.textContent + "\"");
-            comment.setBackground(Color.WHITE);
+//            comment.setBackground(Color.WHITE);
             comment.setLineWrap(true);
             comment.setWrapStyleWord(true);
             comment.setEditable(false);
@@ -202,7 +202,7 @@ public class CommentMitigationSubview extends JPanel {
             // Put everything together
             JPanel listItem = new JPanel();
             listItem.setLayout(new BoxLayout(listItem, BoxLayout.PAGE_AXIS));
-            listItem.setBackground(Color.WHITE);
+//            listItem.setBackground(Color.WHITE);
             listItem.setAlignmentX(0.0f);
             listItem.setAlignmentY(0.0f);
 //            listItem.setMinimumSize(new Dimension(500, 0));
@@ -246,7 +246,7 @@ public class CommentMitigationSubview extends JPanel {
 
         // Setup new comment section
         JTextArea instructionLabel = new JTextArea("Key in your comment, then click on any of the action at the right.");
-        instructionLabel.setBackground(Color.WHITE);
+//        instructionLabel.setBackground(Color.WHITE);
         instructionLabel.setLineWrap(true);
         instructionLabel.setWrapStyleWord(true);
         instructionLabel.setEditable(false);
@@ -259,7 +259,7 @@ public class CommentMitigationSubview extends JPanel {
         instructionLabel.setMaximumSize(new Dimension(300, 50));
 
         newComment = new JBTextArea();
-        newComment.setBackground(Color.WHITE);
+//        newComment.setBackground(Color.WHITE);
         newComment.setLineWrap(true);
         newComment.setFont(new Font("Verdana", Font.PLAIN, instructionLabel.getFont().getSize()));
         //newComment.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
@@ -277,7 +277,7 @@ public class CommentMitigationSubview extends JPanel {
         newCommentPanel.setLayout(new BoxLayout(newCommentPanel, BoxLayout.PAGE_AXIS));
         //parent.setAlignmentX(0.5f);
         //parent.setAlignmentY(0.0f);
-        newCommentPanel.setBackground(Color.WHITE);
+//        newCommentPanel.setBackground(Color.WHITE);
         newCommentPanel.add(instructionLabel);
         newCommentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         newCommentPanel.add(newComment);
@@ -345,7 +345,7 @@ public class CommentMitigationSubview extends JPanel {
         parent.setLayout(new BoxLayout(parent, BoxLayout.PAGE_AXIS));
         //parent.setAlignmentX(0.0f);
         //parent.setAlignmentY(0.0f);
-        parent.setBackground(Color.WHITE);
+//        parent.setBackground(Color.WHITE);
 
         parent.add(Box.createRigidArea(new Dimension(0, 5)));
         parent.add(addNewCommentBtn);

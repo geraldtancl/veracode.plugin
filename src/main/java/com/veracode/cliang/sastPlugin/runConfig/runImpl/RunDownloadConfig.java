@@ -16,6 +16,7 @@ import com.veracode.cliang.sastPlugin.objects.raw.detailedReport.Detailedreport;
 import com.veracode.cliang.sastPlugin.objects.raw.sandboxList.SandboxType;
 import com.veracode.cliang.sastPlugin.services.ReportHolderService;
 import com.veracode.cliang.sastPlugin.services.ResultToolWindowHolderService;
+import com.veracode.cliang.sastPlugin.services.UserRightsHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
 import com.veracode.cliang.sastPlugin.view.toolWindows.result.ResultToolWindowFactory;
 import com.veracode.cliang.sastPlugin.view.toolWindows.runConfig.RunConfigToolWindow;
@@ -79,6 +80,10 @@ public class RunDownloadConfig extends RunConfigBase {
 
         Applist applications = ApplicationOperationWrapper.getApplicationListing();
 
+        // Set user rights information into the holder service
+        UserRightsHolderService userRightsHolderService = ServiceManager.getService(JetbrainsIdeUtil.getCurrentActiveProject(), UserRightsHolderService.class);
+        userRightsHolderService.setUserRights(applications.getUser());
+
         for (AppType app: applications.getApp()) {
             if (app.getAppName().equals(appName.trim())) {
                 logInfo("Found " + appName + " with ID = " + app.getAppId() + ".");
@@ -108,28 +113,39 @@ public class RunDownloadConfig extends RunConfigBase {
 
         List<BuildType> scanList = buildListingParentObj.getBuild();
 
-        scanList.sort(new Comparator<BuildType>() {
-            @Override
-            public int compare(BuildType o1, BuildType o2) {
-                if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
-                    return 9999;
-                } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
-                    return -9999;
-                } else {
-                    return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
-                }
-            }
-        });
+
 
         if (isSandboxScan()) {
+            scanList.sort(new Comparator<BuildType>() {
+                @Override
+                public int compare(BuildType o1, BuildType o2) {
+                    return o1.getBuildId() < o2.getBuildId()? 1 : -1;
+                }
+            });
+
             if (scanList.size() != 0) {
                 scanId = scanList.get(0).getBuildId();
+                logInfo("The latest scan is \"" + scanList.get(0).getVersion() + "\", with build ID = " + scanId);
                 return;
             }
-        } else {
+        } else { // Policy scan
+            scanList.sort(new Comparator<BuildType>() {
+                @Override
+                public int compare(BuildType o1, BuildType o2) {
+                    if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
+                        return 9999;
+                    } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+                        return -9999;
+                    } else {
+                        return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+                    }
+                }
+            });
+
             if (scanList.size() != 0 && scanList.get(0).getPolicyUpdatedDate() != null &&
                     !scanList.get(0).getPolicyUpdatedDate().trim().equals("")) {
                 scanId = scanList.get(0).getBuildId();
+                logInfo("The latest scan is \"" + scanList.get(0).getVersion() + "\", with build ID = " + scanId);
                 return;
             }
         }
@@ -140,6 +156,7 @@ public class RunDownloadConfig extends RunConfigBase {
     private void downloadResult() throws RunConfigException {
         logInfo("STEP 3: Downloading scan result");
         logInfo("===============================");
+
 
         Detailedreport scanReport = ResultOperationWrapper.downloadFullResult(formatScanIdInString());
 

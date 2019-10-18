@@ -45,8 +45,8 @@
             <separator />
             <action class="com.veracode.cliang.sastPlugin.view.actions.UpdateCredentialAction" id="UpdateCredentialAction" text="Update Credential"
                     description="Update API credential" />
-            <separator />
-            <group id="com.veracode.cliang.sast.menu.veracode.runConfig" class="com.veracode.cliang.sastPlugin.view.actions.RunConfigActionGroup" text="Run Config" popup="true" />
+            <!--<separator />
+            <group id="com.veracode.cliang.sast.menu.veracode.runConfig" class="com.veracode.cliang.sastPlugin.view.actions.RunConfigActionGroup" text="Run Config" popup="true" />-->
         </group>
     </actions>
 
