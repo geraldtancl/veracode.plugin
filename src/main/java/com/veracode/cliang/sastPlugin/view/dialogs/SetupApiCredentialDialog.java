@@ -6,6 +6,7 @@ import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextArea;
 import com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,6 +15,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class SetupApiCredentialDialog extends DialogWrapper {
+
+    private static final Class c = SetupApiCredentialDialog.class;
 
     private static final ApiCredentialHolderService API_CREDENTIAL_HOLDER_SERVICE = (ApiCredentialHolderService) ServiceManager.getService(ApiCredentialHolderService.class);
 
@@ -63,7 +66,7 @@ public class SetupApiCredentialDialog extends DialogWrapper {
 
         parentPanel.add(apiKeyScrollPane);
 
-        System.out.println("API ID = " + API_CREDENTIAL_HOLDER_SERVICE.getApiId());
+        PluginLogger.info(c, "API ID = " + API_CREDENTIAL_HOLDER_SERVICE.getApiId());
 
 
         return parentPanel;

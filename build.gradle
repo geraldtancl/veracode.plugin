@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.veracode.cliang'
-version '0.1-SNAPSHOT'
+version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -16,6 +16,10 @@ repositories {
 
 dependencies {
     compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '2.2.0.201212191850-r'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile file('libs/vosp-api-wrappers-java-19.6.5.8.jar')

@@ -22,6 +22,7 @@ import com.veracode.cliang.sastPlugin.services.ReportHolderService;
 import com.veracode.cliang.sastPlugin.services.ResultToolWindowHolderService;
 import com.veracode.cliang.sastPlugin.services.UserRightsHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import com.veracode.cliang.sastPlugin.view.toolWindows.result.ResultToolWindowFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,6 +37,8 @@ import java.util.List;
 
 
 public class ResultSelectorDialog extends DialogWrapper {
+
+    private static final Class c = ResultSelectorDialog.class;
 
     private static final int POLICY_SCAN_TYPE = 1;
     private static final int SANDBOX_SCAN_TYPE = 2;
@@ -128,9 +131,11 @@ public class ResultSelectorDialog extends DialogWrapper {
 
         scanResultPanel.add(appComboBox);
 
-        if (appListingParentObj.getApp() != null) {
+        if (appListingParentObj.getApp() != null && appListingParentObj.getApp().size() > 0) {
             selectedAppId = Long.toString(appListingParentObj.getApp().get(0).getAppId());
             loadScanListingMap(selectedAppId);
+        } else { // No app profile. In this case, initialize the build listing obj to prevent error.
+            buildListingParentObj = new Buildlist();
         }
 
         // Setup sandbox selector panel
@@ -146,7 +151,7 @@ public class ResultSelectorDialog extends DialogWrapper {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 selectedSandboxId = Long.toString(sandboxesMap.get(e.getItem().toString()));
                 refreshScansListing();
-                System.out.println("DEBUG: Sandbox select event -> Value selected = " + selectedSandboxId);
+                PluginLogger.info(c, "DEBUG: Sandbox select event -> Value selected = " + selectedSandboxId);
             }
         });
 
@@ -160,7 +165,7 @@ public class ResultSelectorDialog extends DialogWrapper {
 
         scanResultPanel.add(scanComboBox);
 
-        if (buildListingParentObj.getBuild() != null) {
+        if (buildListingParentObj.getBuild() != null && buildListingParentObj.getBuild().size() > 0) {
             selectedScanId = Long.toString(buildListingParentObj.getBuild().get(0).getBuildId());
         }
 
@@ -183,7 +188,7 @@ public class ResultSelectorDialog extends DialogWrapper {
                         }
                     }
 
-                    System.out.println("DEBUG: Application combobox select event -> Value selected = " + selectedAppId);
+                    PluginLogger.info(c, "DEBUG: Application combobox select event -> Value selected = " + selectedAppId);
                     //workingPopup.cancel();
                 }
             }
@@ -193,7 +198,7 @@ public class ResultSelectorDialog extends DialogWrapper {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 selectedScanId = Long.toString(scansMap.get(e.getItem().toString()));
 
-                System.out.println("DEBUG: Scan combobox select event -> Value selected = " + selectedScanId);
+                PluginLogger.info(c, "DEBUG: Scan combobox select event -> Value selected = " + selectedScanId);
             }
         });
 
@@ -208,18 +213,25 @@ public class ResultSelectorDialog extends DialogWrapper {
         sandboxComboBox.removeAllItems();
         selectedSandboxId = null;
 
-        Sandboxlist sandboxes = SandboxOperationWrapper.getSandboxListing(selectedAppId);
+        if (selectedAppId != null && selectedAppId.trim().length() > 0) {
+            Sandboxlist sandboxes = SandboxOperationWrapper.getSandboxListing(selectedAppId);
 
-        sandboxesMap = new HashMap<>();
+            // If an app profile has no sandbox
+            if (sandboxes == null) {
+                sandboxes = new Sandboxlist();
+            }
 
-        for (SandboxType sandbox: sandboxes.getSandbox()) {
-            sandboxesMap.put(sandbox.getSandboxName(), sandbox.getSandboxId());
-            sandboxComboBox.addItem(sandbox.getSandboxName());
-        }
+            sandboxesMap = new HashMap<>();
 
-        if (sandboxes.getSandbox() != null && sandboxes.getSandbox().size() > 0) {
-            selectedSandboxId = Long.toString(sandboxes.getSandbox().get(0).getSandboxId());
-            refreshScansListing();
+            for (SandboxType sandbox : sandboxes.getSandbox()) {
+                sandboxesMap.put(sandbox.getSandboxName(), sandbox.getSandboxId());
+                sandboxComboBox.addItem(sandbox.getSandboxName());
+            }
+
+            if (sandboxes.getSandbox() != null && sandboxes.getSandbox().size() > 0) {
+                selectedSandboxId = Long.toString(sandboxes.getSandbox().get(0).getSandboxId());
+                refreshScansListing();
+            }
         }
     }
 
@@ -244,10 +256,13 @@ public class ResultSelectorDialog extends DialogWrapper {
         applicationsList.sort(new Comparator<AppType>() {
             @Override
             public int compare(AppType o1, AppType o2) {
+                PluginLogger.info(c, "Comparing: " + o1.getAppName() + ", " + o2.getAppName());
                 if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
+                    //return 9999;
                     return 9999;
                 } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
-                    return -9999;
+                    //return -9999;
+                    return 9999;
                 } else {
                     return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
                 }
@@ -298,7 +313,7 @@ public class ResultSelectorDialog extends DialogWrapper {
         for (BuildType scan: scanList) {
             scansMap.put(scan.getVersion(), scan.getBuildId());
 
-            //System.out.println("Scan name: " + scan.getVersion() + ", build id: " + scan.getBuildId() + ", policy updated date: " + scan.getPolicyUpdatedDate());
+            //PluginLogger.info(c, "Scan name: " + scan.getVersion() + ", build id: " + scan.getBuildId() + ", policy updated date: " + scan.getPolicyUpdatedDate());
         }
     }
 
@@ -333,8 +348,8 @@ public class ResultSelectorDialog extends DialogWrapper {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Download button is clicked.");
-            System.out.println("Selected Scan ID: " + currDialog.getSelectedScanId());
+            PluginLogger.info(c, "Download button is clicked.");
+            PluginLogger.info(c, "Selected Scan ID: " + currDialog.getSelectedScanId());
 
             Detailedreport scanReport = ResultOperationWrapper.downloadFullResult(currDialog.getSelectedScanId());
 

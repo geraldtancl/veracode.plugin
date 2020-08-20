@@ -12,6 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.veracode.cliang.sastPlugin.objects.config.ScanConfiguration;
 import com.veracode.cliang.sastPlugin.services.ScanConfigurationHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +22,9 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class RunConfigActionGroup extends ActionGroup {
+
+    private static final Class c = RunConfigActionGroup.class;
+
     public static final String PREFIX_RUN_SCAN = "Scan with";
     public static final String PREFIX_DOWNLOAD = "Download";
 
@@ -68,7 +72,7 @@ public class RunConfigActionGroup extends ActionGroup {
                     return actions.toArray(new AnAction[actions.size()]);
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                PluginLogger.error(c, ex.getMessage(), ex);
             }
         }
 

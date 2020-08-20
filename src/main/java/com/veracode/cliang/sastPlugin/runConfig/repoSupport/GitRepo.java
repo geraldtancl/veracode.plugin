@@ -1,6 +1,7 @@
 package com.veracode.cliang.sastPlugin.runConfig.repoSupport;
 
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -10,16 +11,18 @@ import java.io.IOException;
 
 public class GitRepo implements CodeRepo {
 
+    private static final Class c = GitRepo.class;
+
     private Repository repo;
 
     @Override
     public String obtainBranchName() {
 
         try {
-            System.out.println("Current branch name: " + repo.getBranch());
+            PluginLogger.info(c, "Current branch name: " + repo.getBranch());
             return repo.getBranch();
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return null;
@@ -39,7 +42,7 @@ public class GitRepo implements CodeRepo {
 
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
 

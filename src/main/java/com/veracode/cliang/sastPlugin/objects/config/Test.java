@@ -2,11 +2,13 @@ package com.veracode.cliang.sastPlugin.objects.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 
 public class Test {
+    private static final Class c = Test.class;
     public static void main(String[] args) {
         String jsonString = "[\n" +
                 "  {\n" +
@@ -63,10 +65,10 @@ public class Test {
         Type collectionType = new TypeToken<Collection<ScanConfiguration>>(){}.getType();
         Collection<ScanConfiguration> configs = gson.fromJson(jsonString, collectionType);
 
-        System.out.println("Size of configs: " + configs.size());
+        PluginLogger.info(c, "Size of configs: " + configs.size());
 
         for (ScanConfiguration config: configs) {
-            System.out.println(config + "\n\n\n");
+            PluginLogger.info(c, config + "\n\n\n");
         }
 
     }

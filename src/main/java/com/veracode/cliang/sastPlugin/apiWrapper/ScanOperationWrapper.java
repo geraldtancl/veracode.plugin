@@ -7,6 +7,7 @@ import com.veracode.cliang.sastPlugin.objects.raw.buildInfo.Buildinfo;
 import com.veracode.cliang.sastPlugin.objects.raw.buildList.Buildlist;
 import com.veracode.cliang.sastPlugin.objects.raw.fileList.Filelist;
 import com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class ScanOperationWrapper {
+
+    private static final Class c = ScanOperationWrapper.class;
 
     private static final ApiCredentialHolderService API_CREDENTIAL_HOLDER_SERVICE = (ApiCredentialHolderService) ServiceManager.getService(ApiCredentialHolderService.class);
 
@@ -28,16 +31,16 @@ public class ScanOperationWrapper {
         try {
             xmlOutput = uploadWp.createBuild(appId, scanName, null, null, null, null, null, sandboxId);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Buildinfo.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             buildsInfo = (Buildinfo) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return buildsInfo;
@@ -53,16 +56,16 @@ public class ScanOperationWrapper {
         try {
             xmlOutput = uploadWp.createBuild(appId, scanName);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Buildinfo.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             buildsInfo = (Buildinfo) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return buildsInfo;
@@ -78,16 +81,16 @@ public class ScanOperationWrapper {
         try {
             xmlOutput = uploadWp.uploadFile(appId, filePath, sandboxId);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Filelist.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             fileList = (Filelist) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return fileList;
@@ -103,16 +106,16 @@ public class ScanOperationWrapper {
         try {
             xmlOutput = uploadWp.beginPreScan(appId, sandboxId, "true");
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Buildinfo.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             buildsInfo = (Buildinfo) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return buildsInfo;
@@ -128,18 +131,68 @@ public class ScanOperationWrapper {
         try {
             xmlOutput = uploadWp.getBuildInfo(appId, scanId, sandboxId);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Buildinfo.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             buildsInfo = (Buildinfo) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return buildsInfo;
+    }
+
+    public static Buildlist deletePolicyScan(String appId) {
+        UploadAPIWrapper uploadWp = new UploadAPIWrapper();
+        uploadWp.setUpApiCredentials(API_CREDENTIAL_HOLDER_SERVICE.getApiId(), API_CREDENTIAL_HOLDER_SERVICE.getApiKey());
+        String xmlOutput = null;
+        Buildlist buildList = null;
+        JAXBContext jaxbContext = null;
+
+        try {
+            xmlOutput = uploadWp.deleteBuild(appId);
+
+            PluginLogger.info(c, xmlOutput);
+
+            jaxbContext = JAXBContext.newInstance(Buildlist.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            buildList = (Buildlist) unmarshaller.unmarshal(new StringReader(xmlOutput));
+
+        } catch (IOException e) {
+            PluginLogger.error(c, e.getMessage(), e);
+        } catch (JAXBException e) {
+            PluginLogger.error(c, e.getMessage(), e);
+        }
+
+        return buildList;
+    }
+
+    public static Buildlist deleteSandboxScan(String appId, String sandboxId) {
+        UploadAPIWrapper uploadWp = new UploadAPIWrapper();
+        uploadWp.setUpApiCredentials(API_CREDENTIAL_HOLDER_SERVICE.getApiId(), API_CREDENTIAL_HOLDER_SERVICE.getApiKey());
+        String xmlOutput = null;
+        Buildlist buildList = null;
+        JAXBContext jaxbContext = null;
+
+        try {
+            xmlOutput = uploadWp.deleteBuild(appId, sandboxId);
+
+            PluginLogger.info(c, xmlOutput);
+
+            jaxbContext = JAXBContext.newInstance(Buildlist.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            buildList = (Buildlist) unmarshaller.unmarshal(new StringReader(xmlOutput));
+
+        } catch (IOException e) {
+            PluginLogger.error(c, e.getMessage(), e);
+        } catch (JAXBException e) {
+            PluginLogger.error(c, e.getMessage(), e);
+        }
+
+        return buildList;
     }
 }

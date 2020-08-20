@@ -4,6 +4,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTabbedPane;
 import com.veracode.cliang.sastPlugin.objects.raw.detailedReport.Detailedreport;
 import com.veracode.cliang.sastPlugin.objects.raw.detailedReport.FlawType;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FindingInformationSubview extends JBTabbedPane {
+
+    private static final Class c = FindingInformationSubview.class;
 
     private String findingInfoTemplate;
     private FlawType selectedFlaw;
@@ -62,7 +65,7 @@ public class FindingInformationSubview extends JBTabbedPane {
 
             findingInfoTemplate = resultStringBuilder.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
 
@@ -118,7 +121,7 @@ public class FindingInformationSubview extends JBTabbedPane {
         infoPane.setContentType("text/html");
         infoPane.setText(findingInfoContent);
 
-        System.out.println(findingInfoContent);
+        PluginLogger.info(c, findingInfoContent);
 
         JScrollPane scrollInfoPane = new JBScrollPane(infoPane);
         scrollInfoPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

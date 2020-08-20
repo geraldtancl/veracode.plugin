@@ -18,9 +18,9 @@ public class MainProgram {
         Date date;
         try {
             date = isoFormat.parse("2019-09-03 01:34:50 UTC");
-            System.out.println(date);
+            //PluginLogger.info(c, date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            //PluginLogger.error(c, e.getMessage(), e);
         }
 
     }

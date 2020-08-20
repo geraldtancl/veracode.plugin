@@ -12,6 +12,7 @@ import com.veracode.cliang.sastPlugin.runConfig.repoSupport.CodeRepo;
 import com.veracode.cliang.sastPlugin.runConfig.repoSupport.RepositoryFinder;
 import com.veracode.cliang.sastPlugin.services.ScanConfigurationHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -21,9 +22,12 @@ import java.util.Collection;
 import java.util.regex.Pattern;
 
 public abstract class RunAutoActionBase extends AnAction {
+
+    private static final Class c = RunAutoActionBase.class;
+
     @Override
     public void update(@NotNull AnActionEvent e) {
-
+        PluginLogger.info(c, "update");
         e.getPresentation().setEnabled(false);
 
         String path = JetbrainsIdeUtil.getCurrentActiveProject().getBasePath() + File.separator + "veracode.config";
@@ -44,7 +48,7 @@ public abstract class RunAutoActionBase extends AnAction {
                     e.getPresentation().setEnabled(true);
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                PluginLogger.error(c, ex.getMessage(), ex);
             }
         }
     }
@@ -64,7 +68,7 @@ public abstract class RunAutoActionBase extends AnAction {
 
         for (ScanConfiguration scanConfig: scanConfigs) {
             boolean isMatched = Pattern.matches(scanConfig.getBranch_pattern(), branchName);
-            System.out.println("Branch name: [" + branchName + "], " + isMatched);
+            PluginLogger.info(c, "Branch name: [" + branchName + "], " + isMatched);
             if (isMatched) {
                 return scanConfig;
             }
@@ -72,7 +76,7 @@ public abstract class RunAutoActionBase extends AnAction {
         }
 
         // if the code runs to this part, we really don't know how to handle it - this is extremely unlikely
-        System.out.println("Run into an unexpected scenario.");
+        PluginLogger.info(c, "Run into an unexpected scenario.");
 
 
         return null;

@@ -4,6 +4,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.veracode.apiwrapper.wrappers.MitigationAPIWrapper;
 import com.veracode.cliang.sastPlugin.objects.raw.mitigationInfo.Mitigationinfo;
 import com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class CommentMitigationOperationWrapper {
+
+    private static final Class c = CommentMitigationOperationWrapper.class;
 
     private static final ApiCredentialHolderService API_CREDENTIAL_HOLDER_SERVICE = (ApiCredentialHolderService) ServiceManager.getService(ApiCredentialHolderService.class);
 
@@ -25,16 +28,16 @@ public class CommentMitigationOperationWrapper {
         try {
             xmlOutput = mitigationWp.updateMitigationInfo(scanId, action, comment, flawList);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Mitigationinfo.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             mitigationInfo = (Mitigationinfo) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
         return mitigationInfo;
     }

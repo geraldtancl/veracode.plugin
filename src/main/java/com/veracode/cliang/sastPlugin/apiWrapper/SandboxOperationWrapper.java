@@ -4,6 +4,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.veracode.apiwrapper.wrappers.SandboxAPIWrapper;
 import com.veracode.cliang.sastPlugin.objects.raw.sandboxList.Sandboxlist;
 import com.veracode.cliang.sastPlugin.services.ApiCredentialHolderService;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class SandboxOperationWrapper {
+
+    private static final Class c = SandboxOperationWrapper.class;
 
     private static final ApiCredentialHolderService API_CREDENTIAL_HOLDER_SERVICE = (ApiCredentialHolderService) ServiceManager.getService(ApiCredentialHolderService.class);
 
@@ -25,16 +28,16 @@ public class SandboxOperationWrapper {
         try {
             xmlOutput = sandboxWp.getSandboxList(appId);
 
-            System.out.println(xmlOutput);
+            PluginLogger.info(c, xmlOutput);
 
             jaxbContext = JAXBContext.newInstance(Sandboxlist.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             sandboxes = (Sandboxlist) unmarshaller.unmarshal(new StringReader(xmlOutput));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            PluginLogger.error(c, e.getMessage(), e);
         }
 
         return sandboxes;

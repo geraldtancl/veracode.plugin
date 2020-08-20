@@ -22,6 +22,7 @@ import com.intellij.ui.treeStructure.Tree;
 import com.veracode.cliang.sastPlugin.objects.raw.detailedReport.*;
 import com.veracode.cliang.sastPlugin.services.ReportHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -40,6 +41,8 @@ import java.util.*;
 import java.util.List;
 
 public class ResultToolWindow implements TreeSelectionListener {
+
+    private static final Class c = ResultToolWindow.class;
 
     ToolWindow toolWindow;
     Detailedreport scanReport;
@@ -435,7 +438,7 @@ public class ResultToolWindow implements TreeSelectionListener {
         //Project[] projects = ProjectManager.getInstance().getOpenProjects();
 
         PsiFile[] results = FilenameIndex.getFilesByName(JetbrainsIdeUtil.getCurrentActiveProject(), sourceFileName, GlobalSearchScope.projectScope(JetbrainsIdeUtil.getCurrentActiveProject()));
-        System.out.println("Search result: " + results.length);
+        PluginLogger.info(c, "Search result: " + results.length);
 
         if (results.length == 1) {
             // Single result
@@ -501,13 +504,13 @@ public class ResultToolWindow implements TreeSelectionListener {
             sourcePath = sourcePath.replace("/", File.separator);
             sourcePath = sourcePath.replace("\\", File.separator);
 
-            System.out.println(File.separator);
-            System.out.println("Source Path = " + sourcePath);
+            PluginLogger.info(c, File.separator);
+            PluginLogger.info(c, "Source Path = " + sourcePath);
 
 
             for (PsiFile file: _results) {
                 if (file.getVirtualFile().getPath().contains(sourcePath)) {
-                    System.out.println("Virtual file path = " + file.getVirtualFile().getPath());
+                    PluginLogger.info(c, "Virtual file path = " + file.getVirtualFile().getPath());
                     _resultsList.add(file);
                 }
             }
@@ -550,6 +553,9 @@ public class ResultToolWindow implements TreeSelectionListener {
 }
 
 class FindingTreeCellRenderer extends DefaultTreeCellRenderer {
+
+    private static final Class c = FindingTreeCellRenderer.class;
+
     ResultToolWindow toolWindow;
 
     public FindingTreeCellRenderer(ResultToolWindow toolWindow) {
@@ -560,12 +566,12 @@ class FindingTreeCellRenderer extends DefaultTreeCellRenderer {
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-        System.out.println("Here for : " + value.toString() + ". Object class: " + value.getClass());
+        PluginLogger.info(c, "Here for : " + value.toString() + ". Object class: " + value.getClass());
 
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
 
         if (node.getUserObject() instanceof FlawType) {
-            System.out.println(". Show affect policy finding only? " + toolWindow.isShowAffectPolicyFindingOnly());
+            PluginLogger.info(c, ". Show affect policy finding only? " + toolWindow.isShowAffectPolicyFindingOnly());
             if (toolWindow.isShowAffectPolicyFindingOnly()) {
                 FlawType finding = (FlawType) node.getUserObject();
 

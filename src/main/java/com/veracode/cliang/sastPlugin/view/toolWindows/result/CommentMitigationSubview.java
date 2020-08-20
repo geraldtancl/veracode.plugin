@@ -11,6 +11,7 @@ import com.veracode.cliang.sastPlugin.objects.raw.mitigationInfo.MitigationActio
 import com.veracode.cliang.sastPlugin.objects.raw.mitigationInfo.Mitigationinfo;
 import com.veracode.cliang.sastPlugin.services.UserRightsHolderService;
 import com.veracode.cliang.sastPlugin.utils.JetbrainsIdeUtil;
+import com.veracode.cliang.sastPlugin.utils.PluginLogger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,6 +23,8 @@ import java.util.*;
 import java.util.List;
 
 public class CommentMitigationSubview extends JPanel {
+
+    private static final Class c = CommentMitigationSubview.class;
 
     private static final String ACTION_COMMENT = "comment";
     private static final String ACTION_MITIGATE_BY_DESIGN = "appdesign";
@@ -103,7 +106,7 @@ public class CommentMitigationSubview extends JPanel {
                 try {
                     date = isoFormat.parse(comment.getDate());
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    PluginLogger.error(c, e.getMessage(), e);
                 }
 
                 commentMitigationList.add(new MergedCommentMitigationObject(comment.getAction(), comment.getDescription(), comment.getUser(), date, MergedCommentMitigationObject.COMMENT));
@@ -120,7 +123,7 @@ public class CommentMitigationSubview extends JPanel {
                 try {
                     date = isoFormat.parse(mitigation.getDate());
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    PluginLogger.error(c, e.getMessage(), e);
                 }
 
                 commentMitigationList.add(new MergedCommentMitigationObject(mitigation.getAction(), mitigation.getDescription(), mitigation.getUser(), date, MergedCommentMitigationObject.MITIGATION));
@@ -227,7 +230,7 @@ public class CommentMitigationSubview extends JPanel {
             parent.add(listItem);
             parent.add(Box.createRigidArea(new Dimension(0, 2)));
 
-            //System.out.println(auditTrailText.toString() + "===" + obj.textContent);
+            //PluginLogger.info(c, auditTrailText.toString() + "===" + obj.textContent);
         }
 
         parent.add(Box.createVerticalGlue());
@@ -465,7 +468,7 @@ public class CommentMitigationSubview extends JPanel {
             date = cal.getTime();
             dateString = sdf.format(date);
         } catch (ParseException ex) {
-            ex.printStackTrace();
+            PluginLogger.error(c, ex.getMessage(), ex);
         }
 
         return dateString;

@@ -3,7 +3,7 @@
     <name>Veracode Static Analysis (Unofficial)</name>
     <vendor email="cliang@veracode.com" url="https://www.veracode.com">Veracode (Unofficial)</vendor>
 
-    <idea-version since-build="182.*" until-build="193.*" />
+    <idea-version since-build="183.*" until-build="202.*" />
 
     <description><![CDATA[
     Enter short description for plugin here.<br>

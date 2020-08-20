@@ -6,13 +6,16 @@ import com.intellij.credentialStore.Credentials;
 import com.intellij.ide.passwordSafe.PasswordSafe;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.wm.WindowManager;
 
-import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class JetbrainsIdeUtil {
 
+    private static final Class c = JetbrainsIdeUtil.class;
 
     private static final String VERACODE_PLUGIN_CREDENTIAL_KEY = "Veracode_Plugin_Credential";
 
@@ -25,7 +28,9 @@ public class JetbrainsIdeUtil {
             if (window != null && window.isActive()) {
                 activeProject = project;
 
-            } else System.out.println();
+            } else {
+                PluginLogger.info(c, "No active project");
+            }
         }
 
         return activeProject;
@@ -59,6 +64,35 @@ public class JetbrainsIdeUtil {
         return new CredentialAttributes(CredentialAttributesKt.generateServiceName("Veracode API Login", key));
     }
 
+    public static File copyActiveProjectToTemp() {
+        PluginLogger.info(c, "Temp Directory: " + FileUtil.getTempDirectory());
 
+        try {
+            File tempDir = new File(FileUtil.getTempDirectory());
 
+            if (tempDir.exists()) {
+//
+                // Create a new folder to prevent overwriting
+                File copyDestFolder = new File(tempDir, getCurrentActiveProject().getName() + "-" + System.currentTimeMillis());
+                PluginLogger.info(c, copyDestFolder.mkdir()? "Child dir created":"Child dir not created");
+
+                FileUtil.copyDir(new File(getCurrentActiveProject().getBasePath()), copyDestFolder);
+                return copyDestFolder;
+
+            }
+        } catch (IOException e) {
+            PluginLogger.error(c, e.getMessage(), e);
+
+        }
+
+        return null;
+    }
+
+    /*public static VirtualFile[] getAllFilesInCurrActiveProject() {
+        //ProjectRootManager prm = ProjectRootManager.getInstance(getCurrentActiveProject());
+        ProjectFileIndex pfi = ProjectFileIndex.getInstance(getCurrentActiveProject());
+        pfi.iterateContent();
+        return null;
+    }
+*/
 }
