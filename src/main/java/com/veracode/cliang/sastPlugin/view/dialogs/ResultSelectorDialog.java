@@ -72,10 +72,13 @@ public class ResultSelectorDialog extends DialogWrapper {
 
         JPanel waitPanel = new JPanel();
         waitPanel.setSize(0, 200);
+//        waitPanel.setOpaque(true);
         JLabel label = new JLabel("Working on it right now, hold on a sec...");
-        label.setFont(new Font("Serif", Font.PLAIN, 16));
+        label.setFont(new Font("Serif", Font.BOLD, 16));
+        label.setBackground(Color.WHITE);
         label.setForeground(Color.BLUE);
         waitPanel.add(label);
+//        waitPanel.repaint();
         JBPopup workingPopup = JBPopupFactory.getInstance().createComponentPopupBuilder(waitPanel, waitPanel).setCancelOnClickOutside(false).createPopup();
         workingPopup.showInFocusCenter();
 
@@ -257,15 +260,31 @@ public class ResultSelectorDialog extends DialogWrapper {
             @Override
             public int compare(AppType o1, AppType o2) {
                 PluginLogger.info(c, "Comparing: " + o1.getAppName() + ", " + o2.getAppName());
+
+                String o1Date, o2Date;
+
                 if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
-                    //return 9999;
-                    return 9999;
-                } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
-                    //return -9999;
-                    return 9999;
+                    o1Date = "1900-01-01";
                 } else {
-                    return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+                    o1Date = o1.getPolicyUpdatedDate();
                 }
+
+                if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+                    o2Date = "1900-01-01";
+                } else {
+                    o2Date = o2.getPolicyUpdatedDate();
+                }
+
+//                if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
+//                    //return 9999;
+//                    return o2.getPolicyUpdatedDate().compareTo("1900-01-01");
+//                } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+//                    //return -9999;
+//                    return "1900-01-01".compareTo(o1.getPolicyUpdatedDate());
+//                } else {
+//                    return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+//                }
+                return o2Date.compareTo(o1Date);
             }
         });
 
@@ -290,13 +309,28 @@ public class ResultSelectorDialog extends DialogWrapper {
             scanList.sort(new Comparator<BuildType>() {
                 @Override
                 public int compare(BuildType o1, BuildType o2) {
+//                    if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
+//                        return 9999;
+//                    } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+//                        return -9999;
+//                    } else {
+//                        return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+//                    }
+                    String o1Date, o2Date;
+
                     if (o1.getPolicyUpdatedDate() == null || o1.getPolicyUpdatedDate().trim().equals("")) {
-                        return 9999;
-                    } else if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
-                        return -9999;
+                        o1Date = "1900-01-01";
                     } else {
-                        return o2.getPolicyUpdatedDate().compareTo(o1.getPolicyUpdatedDate());
+                        o1Date = o1.getPolicyUpdatedDate();
                     }
+
+                    if (o2.getPolicyUpdatedDate() == null || o2.getPolicyUpdatedDate().trim().equals("")) {
+                        o2Date = "1900-01-01";
+                    } else {
+                        o2Date = o2.getPolicyUpdatedDate();
+                    }
+
+                    return o2Date.compareTo(o1Date);
                 }
             });
         } else {

@@ -66,11 +66,16 @@ public class ResultToolWindow implements TreeSelectionListener {
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content viewBySeverityTab = contentFactory.createContent(constructBySeverityContentView(), "By Severity", false);
         toolWindow.getContentManager().addContent(viewBySeverityTab);
+        toolWindow.show(null);
+        //PluginLogger.info(c,"Toolwindow content size: " + toolWindow.getContentManager().getContents().length);
     }
 
     public void refreshResultToolWindowUI() {
+        PluginLogger.info(c, "Refreshing tool window.");
         toolWindow.getContentManager().removeAllContents(true);
+        PluginLogger.info(c, "Resetting done. Initializing UI.");
         initializeResultToolWindowUI();
+        PluginLogger.info(c,"Toolwindow content size: " + toolWindow.getContentManager().getContents().length);
         toolWindow.show(null);
     }
 
@@ -366,8 +371,12 @@ public class ResultToolWindow implements TreeSelectionListener {
 
         }
 
-        JBTabbedPane severityTabs = new JBTabbedPane(JBTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-
+        JTabbedPane severityTabs = new JTabbedPane(JBTabbedPane.TOP, JBTabbedPane.SCROLL_TAB_LAYOUT);
+        /*
+        20210726 - Fall back with JTabbedPane usage. THe Jetbrain's JBTabbedPane object in the latest version throws
+        a lot of NPE in the UI. No idea why.
+         */
+//        JBTabbedPane severityTabs = new JBTabbedPane(JBTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
         severityTabs.addTab("VH", paneList.get(0));
         severityTabs.addTab("H", paneList.get(1));
         severityTabs.addTab("M", paneList.get(2));
