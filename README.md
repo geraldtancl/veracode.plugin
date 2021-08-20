@@ -18,7 +18,7 @@ The plugin is known working with the following IDEs:
 The plugin is known working with the version up to #IC-211.*
 
 ## Installation
-1. Download the plugin from 
+1. Download the latest version of the plugin from [distributions folder](/geraldtancl/veracode.plugin/tree/master/build/distributions)
 2. Follow this [instruction](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) to get it installed.
 
 ## Configuration
