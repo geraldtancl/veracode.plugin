@@ -8,7 +8,7 @@ plugins {
 
 
 group 'com.veracode.cliang'
-version '1.2.1-SNAPSHOT'
+version 'release-1.0'
 
 sourceCompatibility = 1.8
 
