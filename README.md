@@ -20,3 +20,8 @@ The plugin is known working with the version up to #IC-211.*
 ## Installation
 1. Download the plugin from 
 2. Follow this [instruction](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) to get it installed.
+
+## Configuration
+1. [Generate your API credentials](https://help.veracode.com/r/t_create_api_creds)
+2. Launch any action on the plugin. The plugin will request for your API credential automatically if it did not find any stored credential
+3. All set.
