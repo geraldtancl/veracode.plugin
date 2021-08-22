@@ -3,6 +3,13 @@
 ## Introduction
 This is a very simple community plugin that I developed for comlimenting Veracode's official IDE integration with Jetbrains IDE products. It enables you to download the SAST result from Veracode Platform into your Jetbrains IDE and conveniently work within your day-to-day tool chain!
 
+## Release Note
+### Version [1.0](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.0.zip)
+The very initial release which consists the core functionality of this plugin:
+* Download policy / sandbox scan result
+* Work with the flaw directly
+* Automated scan upload and result download **(BETA Feature! More Info: )**
+
 ## "Supported" Jetbrains IDEs and Versions
 Unlike official supported IDE plugins by Veracode, this is a self-initiated project - I am unable to test it against **all** Jetbrains IDE products. But, the information below is gathered from customers who are using it!
 
@@ -44,3 +51,5 @@ The plugin is known working with the version up to #IC-211.*
 
 ## Feedback / Request
 File it to ["Issues"](https://github.com/geraldtancl/veracode.plugin/issues)!
+
+## Automated Scan Upload and Download (BETA Feature)
