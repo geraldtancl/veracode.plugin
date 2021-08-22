@@ -8,7 +8,8 @@ This is a very simple community plugin that I developed for comlimenting Veracod
 The very initial release which consists the core functionality of this plugin:
 * Download policy / sandbox scan result
 * Work with the flaw directly
-* Automated scan upload and result download **(BETA Feature! More Info: )**
+* Automated scan upload and result download **(BETA Feature! More Info [here](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.0.zip))**
+
 
 ## "Supported" Jetbrains IDEs and Versions
 Unlike official supported IDE plugins by Veracode, this is a self-initiated project - I am unable to test it against **all** Jetbrains IDE products. But, the information below is gathered from customers who are using it!
