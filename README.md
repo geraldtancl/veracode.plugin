@@ -41,3 +41,6 @@ The plugin is known working with the version up to #IC-211.*
 ## Roadmap
 1. To add flaw actions "Reported to Library Maintainer" and "Accept the Risk" 
 2. Pipeline Scan (Potentially)
+
+## Feedback / Request
+File it to ["Issues"](https://github.com/geraldtancl/veracode.plugin/issues)!
