@@ -27,10 +27,10 @@ The plugin is known working with the version up to #IC-211.*
 3. All set.
 
 ## Usage
-1. Download scan result (policy scan / sandbox scan) manually
-  * ![Manual download scan result 1](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Manual_Download_Menu.png)
-  * ![Manual download scan result 2](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Result_Selector.png)
-1. Shows only flaws affecting compliance policy
-  * ![Flaws affecting compliance](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Flaw_Affecting_Policy.png)
-1. Act on the flaw directly via various option, such as commeting, mitigation
-  * ![Act on flaw](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Act_on_Finding.png)
+* Download scan result (policy scan / sandbox scan) manually
+  ![Manual download scan result 1](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Manual_Download_Menu.png)
+  ![Manual download scan result 2](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Result_Selector.png)
+* Shows only flaws affecting compliance policy
+  ![Flaws affecting compliance](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Flaw_Affecting_Policy.png)
+* Act on the flaw directly via various option, such as commeting, mitigation
+  ![Act on flaw](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Act_on_Finding.png)
