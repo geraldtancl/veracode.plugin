@@ -59,7 +59,7 @@ This feature aims to enable developer for kicking off scanning and downloading r
 
 Below is the steps to use this feature.
 1. Copy the [veracode.config] file and place it at the root of your project (Please note that you will have to maintain the naming convention as such). You will see that the "Scan Application" and "Download Result" menu items are enabled.
-2. Open the veracode.config, add / remove the config block (a config block looks like the following).
+2. Open the veracode.config, locate a config block (a config block looks like the following).
    ```
    {
     "config_name": "Policy Scan Config",
@@ -91,5 +91,12 @@ Below is the steps to use this feature.
     }
    },
    ```
-3. as
-4. sd
+3. A config block is used to instruct the plugin to intiiate a scanning to a specific location (app profile + policy / sandbox), with what to upload. You can add / remove the config block as necessary. The following parameters are needed to be updated depends on your application:
+  * **app_name**: the application profile name
+  * **config_name**: A name that you prefer for that config block
+  * **branch_pattern**: the git branch pattern. This is a regex.
+  * **scan_type**: policy / sandbox
+  * **sandbox_name**: the sandbox name (sandbox must exist first), if scan_type = sandbox
+  * **upload_include_patterns**: the file pattern to include for upload
+  * **upload_exclude_patterns**: the file pattern to exclude for upload 
+  Do not modify the **scan_naming** in this beta version.
