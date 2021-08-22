@@ -48,9 +48,48 @@ The plugin is known working with the version up to #IC-211.*
 
 ## Roadmap
 1. To add flaw actions "Reported to Library Maintainer" and "Accept the Risk" 
-2. Pipeline Scan (Potentially)
+2. To change the authentication using credential file
+3. Pipeline Scan (Potentially)
 
 ## Feedback / Request
 File it to ["Issues"](https://github.com/geraldtancl/veracode.plugin/issues)!
 
 ## Automated Scan Upload and Download (BETA Feature)
+This feature aims to enable developer for kicking off scanning and downloading result in a single click! 
+
+Below is the steps to use this feature.
+1. Copy the [veracode.config] file and place it at the root of your project (Please note that you will have to maintain the naming convention as such). You will see that the "Scan Application" and "Download Result" menu items are enabled.
+2. Open the veracode.config, add / remove the config block (a config block looks like the following).
+   ```
+   {
+    "config_name": "Policy Scan Config",
+    "branch_pattern": "master",
+    "static_config": {
+      "scan_type": "policy",
+      "sandbox_name": "",
+      "scan_naming": "timestamp",
+      "upload_include_patterns": [
+        ".*.php",
+        ".*.module",
+        ".*.inc",
+        ".*.html",
+        ".*.htm",
+        ".*.profile",
+        ".*.install",
+        ".*.engine",
+        ".*.theme",
+        ".*.php4",
+        ".*.php5",
+        ".*.php7",
+        ".*.phtml"
+      ],
+      "upload_exclude_patterns": [
+      ]
+    },
+    "portfolio": {
+      "app_name": "Test PHP"
+    }
+   },
+   ```
+3. as
+4. sd
