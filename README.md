@@ -34,3 +34,10 @@ The plugin is known working with the version up to #IC-211.*
   ![Flaws affecting compliance](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Flaw_Affecting_Policy.png)
 * Act on the flaw directly via various option, such as commeting, mitigation
   ![Act on flaw](https://github.com/geraldtancl/veracode.plugin/blob/master/docs/images/Act_on_Finding.png)
+  
+## Known Issue
+* You may very likely encounter this issue - when select a flaw from the tree, the flaw description is not shown. This is a known problem which occurred after a certain version of IDE base platform. I am still trying hard to get this resolved. **Workaround: Click on "Comments / Mitigations" tab then toggle back to "Description" again.**
+
+## Roadmap
+1. To add flaw actions "Reported to Library Maintainer" and "Accept the Risk" 
+2. Pipeline Scan (Potentially)
