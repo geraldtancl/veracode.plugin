@@ -92,11 +92,11 @@ Below is the steps to use this feature.
    },
    ```
 3. A config block is used to instruct the plugin to intiiate a scanning to a specific location (app profile + policy / sandbox), with what to upload. You can add / remove the config block as necessary. The following parameters are needed to be updated depends on your application:
-  * **app_name**: the application profile name
-  * **config_name**: A name that you prefer for that config block
-  * **branch_pattern**: the git branch pattern. This is a regex.
-  * **scan_type**: policy / sandbox
-  * **sandbox_name**: the sandbox name (sandbox must exist first), if scan_type = sandbox
-  * **upload_include_patterns**: the file pattern to include for upload
-  * **upload_exclude_patterns**: the file pattern to exclude for upload 
-  Do not modify the **scan_naming** in this beta version.
+   * **app_name**: the application profile name
+   * **config_name**: A name that you prefer for that config block
+   * **branch_pattern**: the git branch pattern. This is a regex.
+   * **scan_type**: policy / sandbox
+   * **sandbox_name**: the sandbox name (sandbox must exist first), if scan_type = sandbox
+   * **upload_include_patterns**: the file pattern to include for upload
+   * **upload_exclude_patterns**: the file pattern to exclude for upload 
+   Do not modify the **scan_naming** in this beta version.
