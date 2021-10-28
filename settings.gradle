@@ -1,2 +1,13 @@
-rootProject.name = 'veracode.plugin'
+//rootProject.name = 'veracode.plugin'
+
+pluginManagement {
+    rootProject.name = 'veracode.plugin'
+
+    repositories {
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+        gradlePluginPortal()
+    }
+}
 

@@ -1,5 +1,6 @@
 package com.veracode.cliang.sastPlugin.view.toolWindows.result;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.markup.HighlighterLayer;
@@ -80,7 +81,12 @@ public class ResultToolWindow implements TreeSelectionListener {
     }
 
     private void refreshFindingInfoAndWorkAreaUI() {
+        System.out.println("Before remove");
+        System.out.println(findingInfoPanel.getComponent(0).getSize());
         findingInfoPanel.removeAll();
+
+
+
         GridBagConstraints c = new GridBagConstraints();
         // GridBagConstraint for info panel
         c.fill = GridBagConstraints.BOTH;
@@ -94,9 +100,20 @@ public class ResultToolWindow implements TreeSelectionListener {
         c.weighty = 1;
         // GridBagConstraint for info panel
 
-        findingInfoPanel.add(new FindingInformationSubview(selectedFlaw, scanReport), c);
+        FindingInformationSubview subview = new FindingInformationSubview(selectedFlaw, scanReport);
+        findingInfoPanel.add(subview, c);
 
         findingInfoPanel.revalidate();
+        findingInfoPanel.repaint();
+
+
+        System.out.println("After adding");
+
+        System.out.println(findingInfoPanel.getComponent(0).getSize());
+        System.out.println(SwingUtilities.isEventDispatchThread());
+
+
+        System.out.print(findingInfoPanel.isVisible());
 
 //        workAreaPanel.removeAll();
 //        workAreaPanel.add(constructWorkArea());

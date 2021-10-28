@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindingInformationSubview extends JBTabbedPane {
+public class FindingInformationSubview extends JTabbedPane {
 
     private static final Class c = FindingInformationSubview.class;
 
@@ -76,6 +76,7 @@ public class FindingInformationSubview extends JBTabbedPane {
 
         // Setting up tab content for description
         if (selectedFlaw == null) {
+
 //            JPanel parent = new JPanel();
 //            return new JLabel("Choose a flaw first");
             return;
@@ -123,7 +124,7 @@ public class FindingInformationSubview extends JBTabbedPane {
 
         PluginLogger.info(c, findingInfoContent);
 
-        JScrollPane scrollInfoPane = new JBScrollPane(infoPane);
+        JScrollPane scrollInfoPane = new JScrollPane(infoPane);
         scrollInfoPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollInfoPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 

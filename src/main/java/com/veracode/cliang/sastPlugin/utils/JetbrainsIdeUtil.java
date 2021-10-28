@@ -20,6 +20,7 @@ public class JetbrainsIdeUtil {
     private static final String VERACODE_PLUGIN_CREDENTIAL_KEY = "Veracode_Plugin_Credential";
 
     public static Project getCurrentActiveProject() {
+
         Project[] projects = ProjectManager.getInstance().getOpenProjects();
         Project activeProject = null;
         for (Project project : projects) {
@@ -71,10 +72,14 @@ public class JetbrainsIdeUtil {
             File tempDir = new File(FileUtil.getTempDirectory());
 
             if (tempDir.exists()) {
-//
+
                 // Create a new folder to prevent overwriting
+
                 File copyDestFolder = new File(tempDir, getCurrentActiveProject().getName() + "-" + System.currentTimeMillis());
                 PluginLogger.info(c, copyDestFolder.mkdir()? "Child dir created":"Child dir not created");
+                System.out.println(getCurrentActiveProject());
+                System.out.println("Current Active Project Base Path: " + getCurrentActiveProject().getBasePath());
+                System.out.println("Before copy");
 
                 FileUtil.copyDir(new File(getCurrentActiveProject().getBasePath()), copyDestFolder);
                 return copyDestFolder;
@@ -83,6 +88,9 @@ public class JetbrainsIdeUtil {
         } catch (IOException e) {
             PluginLogger.error(c, e.getMessage(), e);
 
+        } catch (Exception e) {
+            System.out.println("Caught exception.");
+            System.out.println(e);
         }
 
         return null;
