@@ -4,6 +4,9 @@
 This is a very simple community plugin that I developed for comlimenting Veracode's official IDE integration with Jetbrains IDE products. It enables you to download the SAST result from Veracode Platform into your Jetbrains IDE and conveniently work within your day-to-day tool chain!
 
 ## Release Note
+### Version [1.2.1](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.2.1.zip)
+Support Rider build 2021.2.2
+
 ### Version [1.2](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.2.zip)
 Change the API authentication to use API credential file.
 
