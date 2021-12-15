@@ -31,6 +31,9 @@ public class ApiCredentialHolderService {
         }
     }
 
+    // Update and reset function of credential is no longer needed - change by feature/use-credential-file
+    // For changing credential, change the credential file directly.
+    /*
     public void updateCredential(String apiId, String apiKey) {
         this.apiId = apiId;
         this.apiKey = apiKey;
@@ -42,6 +45,8 @@ public class ApiCredentialHolderService {
         this.apiKey = null;
         JetbrainsIdeUtil.resetApiCredential();
     }
+
+     */
 
     public String getApiId() {
         return apiId;

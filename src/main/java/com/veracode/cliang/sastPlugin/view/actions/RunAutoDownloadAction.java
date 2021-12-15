@@ -40,6 +40,7 @@ public class RunAutoDownloadAction extends RunAutoActionBase {
 
             runConfigToolWindow.getRunConfigTW().activate(null);
             ApplicationManager.getApplication().executeOnPooledThread(configRunner);
+
         }
     }
 

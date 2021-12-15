@@ -8,10 +8,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.wm.WindowManager;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class JetbrainsIdeUtil {
 
@@ -37,22 +41,63 @@ public class JetbrainsIdeUtil {
         return activeProject;
     }
 
-    public static void saveApiCredential(String apiId, String apiKey) {
-        CredentialAttributes credentialAttributes = createCredentialAttributes(VERACODE_PLUGIN_CREDENTIAL_KEY); // see previous sample
-        Credentials credentials = new Credentials(apiId, apiKey);
-        PasswordSafe.getInstance().set(credentialAttributes, credentials);
-    }
-
     public static String[] loadApiCredential() {
-
+        /* This is changed under feature/use-credential-file. API ID and Key will be read from Veracode credential file instead.
         CredentialAttributes credentialAttributes = createCredentialAttributes(VERACODE_PLUGIN_CREDENTIAL_KEY);
         Credentials credentials = PasswordSafe.getInstance().get(credentialAttributes);
 
         if (credentials != null) {
             return new String[]{credentials.getUserName(), credentials.getPasswordAsString()};
         }
+        */
 
-        return null;
+        final File USER_HOME = SystemUtils.getUserHome();
+        final String PATH_SUFFIX = File.separator + ".veracode" + File.separator + "credentials";
+        final String CREDENTIAL_FILE_PATH = USER_HOME + PATH_SUFFIX;
+
+        String[] credential = null;
+        File credentialFile = new File(CREDENTIAL_FILE_PATH);
+
+        PluginLogger.info(c,"CREDENTIAL FILE PATH: " + CREDENTIAL_FILE_PATH);
+
+        if (credentialFile.exists()) {
+            PluginLogger.info(c, "Credential file exists.");
+
+            try (InputStream input = new FileInputStream(credentialFile)) {
+
+                Properties prop = new Properties();
+
+                // load a properties file
+                prop.load(input);
+
+                final String API_ID = prop.getProperty("veracode_api_key_id");
+                final String API_KEY = prop.getProperty("veracode_api_key_secret");
+
+                if (API_ID.trim().length() > 0 && API_KEY.trim().length() > 0) {
+                    PluginLogger.info(c, "Length of API ID and KEY - " + API_ID.length() + " and " + API_KEY.length());
+
+                    credential = new String[] {API_ID, API_KEY};
+                }
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
+
+        return credential;
+
+    }
+
+    // Update and reset function of credential is no longer needed - change by feature/use-credential-file
+    // For changing credential, change the credential file directly.
+    /*
+    public static void saveApiCredential(String apiId, String apiKey) {
+        CredentialAttributes credentialAttributes = createCredentialAttributes(VERACODE_PLUGIN_CREDENTIAL_KEY); // see previous sample
+        Credentials credentials = new Credentials(apiId, apiKey);
+        PasswordSafe.getInstance().set(credentialAttributes, credentials);
     }
 
     public static void resetApiCredential() {
@@ -60,6 +105,8 @@ public class JetbrainsIdeUtil {
         PasswordSafe.getInstance().set(credentialAttributes, null);
 
     }
+
+     */
 
     private static CredentialAttributes createCredentialAttributes(String key) {
         return new CredentialAttributes(CredentialAttributesKt.generateServiceName("Veracode API Login", key));
