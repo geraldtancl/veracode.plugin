@@ -38,6 +38,7 @@ intellij {
 //    version = '2020.3.2'
 //    version = '2021.2.1'
     version = '2021.2.2'
+    
 //    version = '2021.2.3'
     //version 'LATEST-EAP-SNAPSHOT'
 //    updateSinceUntilBuild false
