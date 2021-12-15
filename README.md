@@ -4,6 +4,9 @@
 This is a very simple community plugin that I developed for comlimenting Veracode's official IDE integration with Jetbrains IDE products. It enables you to download the SAST result from Veracode Platform into your Jetbrains IDE and conveniently work within your day-to-day tool chain!
 
 ## Release Note
+### Version [1.2](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.2.zip)
+Change the API authentication to use API credential file.
+
 ### Version [1.0](https://github.com/geraldtancl/veracode.plugin/blob/master/build/distributions/veracode.plugin-release-1.0.zip)
 The very initial release which consists the core functionality of this plugin:
 * Download policy / sandbox scan result
@@ -31,7 +34,7 @@ The plugin is known working with the version up to #IC-211.*
 
 ## Configuration
 1. [Generate your API credentials](https://help.veracode.com/r/t_create_api_creds)
-2. Launch any action on the plugin. The plugin will request for your API credential automatically if it did not find any stored credential
+2. [Setup Veracode credential file](https://docs.veracode.com/r/c_configure_api_cred_file)
 3. All set.
 
 ## Usage
@@ -47,9 +50,8 @@ The plugin is known working with the version up to #IC-211.*
 * You may very likely encounter this issue - when select a flaw from the tree, the flaw description is not shown. This is a known problem which occurred after a certain version of IDE base platform. I am still trying hard to get this resolved. **Workaround: Click on "Comments / Mitigations" tab then toggle back to "Description" again.**
 
 ## Roadmap
-1. To add flaw actions "Reported to Library Maintainer" and "Accept the Risk" 
-2. To change the authentication using credential file
-3. Pipeline Scan (Potentially)
+1. To add flaw actions "Reported to Library Maintainer" and "Accept the Risk"
+1. Pipeline Scan (Potentially)
 
 ## Feedback / Request
 File it to ["Issues"](https://github.com/geraldtancl/veracode.plugin/issues)!
