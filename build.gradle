@@ -9,7 +9,7 @@ plugins {
 
 
 group 'com.veracode.cliang'
-version 'release-1.2'
+version 'release-1.2.1'
 
 sourceCompatibility = 1.8
 
@@ -37,7 +37,8 @@ intellij {
 //    version = '2019.1.4'
 //    version = '2020.3.2'
 //    version = '2021.2.1'
-    version = '2021.2.3'
+    version = '2021.2.2'
+//    version = '2021.2.3'
     //version 'LATEST-EAP-SNAPSHOT'
 //    updateSinceUntilBuild false
 }
