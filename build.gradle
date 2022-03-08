@@ -9,7 +9,7 @@ plugins {
 
 
 group 'com.veracode.cliang'
-version 'release-1.2.1'
+version 'release-1.2.2'
 
 sourceCompatibility = 1.8
 
@@ -33,16 +33,22 @@ dependencies {
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
+
+
 intellij {
-//    version = '2019.1.4'
+    version = '2019.1.4'
 //    version = '2020.3.2'
 //    version = '2021.2.1'
-    version = '2021.2.2'
-    
-//    version = '2021.2.3'
-    //version 'LATEST-EAP-SNAPSHOT'
-//    updateSinceUntilBuild false
+//    version = '2021.2.2'
+//    version = '221.3427'
+//    version = '213.6461.79'
+//    version = '2020.3.4'
+//    version = '211.7628.21'
+//    version = '2021.3.2'
+//    version = 'LATEST-EAP-SNAPSHOT'
+    updateSinceUntilBuild = false
 }
+
 
 
 
